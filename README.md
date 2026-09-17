@@ -1,24 +1,18 @@
 # Rhys Pritchard's Art Portfolio Website
 
-The deployed files for [www.rhyspritchard.com](http://www.rhyspritchard.com/), the art portfolio website of Rhys Pritchard (my brother), as pulled from the S3 bucket `www.rhyspritchard.com` on 2026-09-17.
+[www.rhyspritchard.com](https://www.rhyspritchard.com/), the art portfolio website of Rhys Pritchard (my brother).
 
-The site was generated in 2011 with [Blogofile](http://www.blogofile.com/) from Mako templates. That Blogofile source project has not been recovered. What is here is the generated output, plus `index.html.mako.orig` and `css/style.css.orig`, stray backup files that Blogofile copied through and that are the only surviving fragments of the source.
+The site was generated in 2011 with [Blogofile](http://www.blogofile.com/) from Mako templates. The Blogofile source project was probably on Bitbucket and has not been recovered, so this repository holds the generated output, pulled on 2026-09-17 from the S3 bucket `www.rhyspritchard.com` that hosted the site from 2011 until then.
 
 ## Hosting
 
-- The site is S3 static website hosting: bucket `www.rhyspritchard.com`, region us-east-1, index document `index.html`, error document `404.html`. It is plain HTTP only, because S3 website endpoints do not serve TLS.
-- DNS is at Hover. `www` is a CNAME to `www.rhyspritchard.com.s3-website-us-east-1.amazonaws.com`. The apex uses Hover's forwarding to `www`.
-- Do not add a wildcard DNS record pointing at S3. Any hostname that resolves to an S3 website endpoint can be claimed by anyone who creates a bucket with that name. That happened to `ftp.rhyspritchard.com` in September 2026.
+GitHub Pages serves the site from the root of the `master` branch of this repository. `.nojekyll` makes GitHub publish the files as they are, without a Jekyll build.
 
-## Syncing with the bucket
+- `CNAME` sets the custom domain to `www.rhyspritchard.com`. GitHub redirects the apex domain to `www`.
+- DNS is at Hover. `www` is a CNAME to `rhys-p.github.io`. The apex has A records for the GitHub Pages addresses 185.199.108.153, 185.199.109.153, 185.199.110.153 and 185.199.111.153.
+- Do not add a wildcard DNS record. Any hostname that resolves to a shared hosting endpoint can be claimed by whoever registers that name with the host. That happened to `ftp.rhyspritchard.com` in September 2026 while a wildcard pointed at S3.
 
-Pull the bucket into this directory, using an AWS CLI profile with read access to the bucket:
-
-```
-aws s3 sync s3://www.rhyspritchard.com . --profile <profile>
-```
-
-Pushing is the same command with the source and destination swapped and `--exclude ".git/*"` added.
+The S3 bucket `www.rhyspritchard.com` is the former host and is no longer referenced by DNS.
 
 ## Copyright and Licenses
 
